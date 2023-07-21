@@ -1,55 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-          
-  
-  
-  
-  <modelVersion>4.0.0</modelVersion>
-          
-  
-  
-  
-  <groupId>com.k1rard</groupId>
-          
-  
-  
-  
-  <artifactId>tiendamusical</artifactId>
-          
-  
-  
-  
-  <version>0.0.1-SNAPSHOT</version>
-          
-  
-  
-  
-  <packaging>pom</packaging>
-        
-  
-  
-  
-  <modules>
-                  
-    
-    
-    
-    <module>tiendamusica-entities</module>
-                  
-    
-    
-    
-    <module>tiendamusical-data</module>
-              
-    
-    
-    <module>tiendamusical-services</module>
-          
-    
-    <module>tiendamusica-web</module>
-      
-  </modules>
-      
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.k1rard</groupId>
+	<artifactId>tiendamusical</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		
+		<junit-version>5.9.3</junit-version>
+		<hibernate-version>6.2.6.Final</hibernate-version>
+		<mysql-connector-version>8.0.33</mysql-connector-version>
+		<spring-data-jpa-version>3.1.2</spring-data-jpa-version>
+		<spring-version>6.0.11</spring-version>
+		<commons-dbcp2-version>2.9.0</commons-dbcp2-version>
+		<hibernate-jpa-version>1.0.2.Final</hibernate-jpa-version>
+		<glassfish-jakarta-faces-version>3.0.2</glassfish-jakarta-faces-version>
+		<jboss-weld-servlet-shaded-version>5.1.0.Final</jboss-weld-servlet-shaded-version>
+		<jakarta-jstl-api-version>2.0.0</jakarta-jstl-api-version>
+		<primefaces-version>12.0.0</primefaces-version>
+		<primeflex-version>3.2.0</primeflex-version>
+	</properties>
+
+	<modules>
+		<module>tiendamusica-entities</module>
+		<module>tiendamusical-data</module>
+		<module>tiendamusical-services</module>
+		<module>tiendamusical-web</module>
+	</modules>
 
 </project>
