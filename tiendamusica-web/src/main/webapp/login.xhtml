@@ -13,16 +13,21 @@
 <h:body>
 
 	<h:form id="formLogin">
-		<p:panel id="pnlLogin" style="text-align: center">
-			<f:facet name="header">
-			 	Inicio de Sesion
-			</f:facet>
-			
-<!-- 			<p:messages id="msgs"> -->
-<!-- 				<p:autoUpdate /> -->
-<!-- 			</p:messages> -->
+<!-- 		<p:panel id="pnlLogin" style="text-align: center"> -->
+<!-- 			<f:facet name="header"> -->
+<!-- 			 	Inicio de Sesion -->
+<!-- 			</f:facet> -->
 
-			<p:growl id="growl" />
+			<!-- 			<p:messages id="msgs"> -->
+			<!-- 				<p:autoUpdate /> -->
+			<!-- 			</p:messages> -->
+			
+			<div class="title-bar flex align-items-center justify-content-center">
+				<p>Inicio de Sesion</p>
+			</div>
+
+			<p:growl id="growl" showDetail="true" skipDetailIfEqualsSummary="true" />
+
 
 			<div
 				class="flex flex-column gap-5 justify-content-center align-items-center"
@@ -32,30 +37,33 @@
 					<p:graphicImage name="images/fondo_musica.png" width="100%" />
 				</div>
 
-				<div class="flex gap-2 justify-content-center align-items-center flex-wrap">
+				<div
+					class="flex gap-2 justify-content-center align-items-center flex-wrap">
 					<p:outputLabel for="txtUsuario" value="Usuario:"
 						styleClass="colorText" />
-					<p:inputText id="txtUsuario" value=""
+					<p:inputText id="txtUsuario" value="${loginController.usuario}"
 						required="true" requiredMessage="El usuario es requerido!" />
 					<p:message for="txtUsuario" />
 				</div>
 
-				<div class="flex gap-2 justify-content-center align-items-center flex-wrap">
+				<div
+					class="flex gap-2 justify-content-center align-items-center flex-wrap">
 					<p:outputLabel for="txtPassword" value="Password:"
 						styleClass="colorText" />
-					<p:password id="txtPassword" value=""
+					<p:password id="txtPassword" value="${loginController.password}"
 						required="true" requiredMessage="El password es requerido!" />
 					<p:message for="txtPassword" />
 				</div>
 
 				<div>
 					<p:commandButton value="Entrar" validateClient="true" ajax="false"
-						update="pnlGridLogin,growl,msgs" />
+						update="pnlGridLogin,growl,msgs"
+						action="${loginController.entrar}" />
 				</div>
 
 			</div>
 
-		</p:panel>
+<!-- 		</p:panel> -->
 	</h:form>
 </h:body>
 

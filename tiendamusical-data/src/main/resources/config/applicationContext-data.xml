@@ -73,5 +73,5 @@
 	
 	<!-- Etiqueta que permite registrar las clases que se encargan de ejecutar las transacciones a la base de datos -->
 	
-	<jpa:repositories base-package="com.k1rard.tiendamusicaldata.repositories" entity-manager-factory-ref="entityManagerFactory"></jpa:repositories>
+	<jpa:repositories base-package="com.k1rard.tiendamusicaldata" entity-manager-factory-ref="entityManagerFactory"></jpa:repositories>
 </beans>
