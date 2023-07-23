@@ -3,15 +3,18 @@
  */
 package com.k1rard.tiendamusicalweb.controllers;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import com.k1rard.tiendamusicalentities.entities.Persona;
 import com.k1rard.tiendamusicalservices.service.LoginService;
+import com.k1rard.tiendamusicalweb.session.SessionBean;
 import com.k1rard.tiendamusicalweb.utils.CommonUtils;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -44,6 +47,9 @@ public class LoginController implements Serializable{
 	 */
 	private String password;
 	
+	@Inject
+	private SessionBean sessionBean;
+	
 	@PostConstruct
 	public void init() {
 		System.out.println("Inicializando login...");
@@ -57,7 +63,13 @@ public class LoginController implements Serializable{
 		Persona personaConsultada = this.loginServiceImpl.consultarUsuarioLogin(this.usuario, this.password);
 
 		if (personaConsultada != null) {
-			CommonUtils.mostrarMensaje(FacesMessage.SEVERITY_INFO, "EXITOSO!", "Bienvenido al home!");
+			try {
+				this.sessionBean.setPersona(personaConsultada);
+				CommonUtils.redireccionar("/pages/commons/dashboard.xhtml");
+			} catch (IOException e) {
+				e.printStackTrace();
+				CommonUtils.mostrarMensaje(FacesMessage.SEVERITY_FATAL, "ERROR!", "Formato incorrecto en el cual se ingresa a la pantalla deseada");
+			}
 		} else {
 			CommonUtils.mostrarMensaje(FacesMessage.SEVERITY_ERROR, "UPS!", "El usuario y/o password son incorrectos");
 		}

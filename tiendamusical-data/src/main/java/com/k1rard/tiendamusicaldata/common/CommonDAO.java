@@ -46,7 +46,7 @@ public class CommonDAO<E, R extends JpaRepository<E, Long>> {
     /**
      * Metodo que permite actualizar la informacion de cualquier entidad.
      * @param e {@link Object} Objeto o entidad a actualizar.
-     * @return {@link Object} Objeto recuperado despues de actualizar el registro.
+     * @return {@link Object} Objeto recuperado despues de actualizar    el registro.
      */
     public E actualizar(E e){
         return this.repository.save(e);

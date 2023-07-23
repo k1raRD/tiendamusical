@@ -1,1 +1,2 @@
-org\tiendamusical\services\App.class
+com\k1rard\tiendamusicalservices\service\impl\LoginServiceImpl.class
+com\k1rard\tiendamusicalservices\service\LoginService.class

@@ -3,8 +3,11 @@
  */
 package com.k1rard.tiendamusicalweb.utils;
 
+import java.io.IOException;
+
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.application.FacesMessage.Severity;
+import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 
 /**
@@ -23,4 +26,14 @@ public class CommonUtils {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, summary, detail));
 	}
 
+	/**
+	 * Metodo que permite redireccionar entre paginas del aplicativo
+	 * @param url {@link String} direccion o pantalla a redireccionar 
+	 * @throws IOException {@link IOException} excepcion en caso de error al no encontrar la pagina
+	 */
+	public static void redireccionar(String url) throws IOException {
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		String contextPath = externalContext.getRequestContextPath();
+		externalContext.redirect(contextPath + url);
+	}
 }
