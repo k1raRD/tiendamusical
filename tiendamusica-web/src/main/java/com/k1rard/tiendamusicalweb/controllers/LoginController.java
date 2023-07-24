@@ -37,15 +37,17 @@ public class LoginController implements Serializable{
 	private String usuario;
 
 	/**
+	 * Password capturado por la persona
+	 */
+	private String password;
+	
+	/**
 	 * Propiedad de la logica de negocio inyectada con JSF y Spring.
 	 */
 	@Autowired
 	private LoginService loginServiceImpl;
 
-	/**
-	 * Password capturado por la persona
-	 */
-	private String password;
+
 	
 	@Inject
 	private SessionBean sessionBean;

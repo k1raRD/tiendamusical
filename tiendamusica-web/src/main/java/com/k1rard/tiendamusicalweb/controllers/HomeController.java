@@ -5,6 +5,9 @@ import com.k1rard.tiendamusicalservices.service.HomeService;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -16,6 +19,11 @@ import java.util.List;
 @Named
 @ViewScoped
 public class HomeController {
+	
+	/**
+	 * Objeto que permite mostrar los mensajes de log en la consola del servidor o en un archivo externo.
+	 */
+	private static final Logger LOGGER = LogManager.getLogger(HomeController.class);
 
     /**
      * Texto ingresado por el cliente en el buscador
@@ -38,7 +46,10 @@ public class HomeController {
      */
     @PostConstruct
     public void init() {
-        System.out.println("Inicializando el home...");
+        LOGGER.info("INFO");
+        LOGGER.warn("WARN");
+        LOGGER.error("ERROR");
+        LOGGER.fatal("FATAL");
     }
 
     /**
@@ -50,7 +61,7 @@ public class HomeController {
 
         if(this.artistasAlbumDTO != null) {
             this.artistasAlbumDTO.forEach(a -> {
-                System.out.println("Artista: " + a.getArtista().getNombre());
+                LOGGER.info("Artista: " + a.getArtista().getNombre());
             });
         }
     }
