@@ -18,35 +18,25 @@
 			<div class="grid sample-layout">
 
 				<div class="flex" style="width: 100%">
-					<div class="col-4" style="background-color: black; border: none">
-						<p:commandLink>
-							<p:graphicImage name="images/fondo_musica.png" width="80%" />
-						</p:commandLink>
+					<ui:include src="/pages/commons/header.xhtml" />
 
-						<ui:include src="/pages/commons/panelMenu.xhtml" />
-					</div>
 
 					<div class="col-8 flex-grow-1" style="background-color: black;">
 						<div class="grid">
 							<div class="col-12">
 
 								<!-- :::::::::::::: PANTALLAS DEL CLIENTE ::::::::::::: -->
-								<c:if test="#{sessionBean.persona.rol.idRol == 4}"> 
+								<c:if test="#{sessionBean.persona.rol.idRol == 4}">
 									<ui:include src="/pages/cliente/home.xhtml" />
 								</c:if>
-								
+
 							</div>
 						</div>
 					</div>
+					</div>
 
+					<ui:include src="/pages/commons/footer.xhtml" />
 				</div>
-
-				<div class="col-12"
-					style="background-color: black; text-align: center;">
-					<p:outputLabel value="@Copyright by K1rard" />
-				</div>
-			</div>
-
 		</h:form>
 	</div>
 </h:body>

@@ -6,8 +6,12 @@
 
 	<p:menubar id="menubar">
 		<f:facet name="options">
-			<p:commandButton id="btnShopping" icon="pi pi-shopping-cart" />
-			<p:commandButton id="btnCerrarSesion"  icon="pi pi-sign-out" action="#{sessionClose.cerrarSesion}" />
+			<p:badge value="2">
+				<p:commandButton id="btnShopping" icon="pi pi-shopping-cart" />
+			</p:badge>
+
+			<p:commandButton id="btnCerrarSesion" icon="pi pi-sign-out"
+				action="#{sessionClose.cerrarSesion}" />
 		</f:facet>
 	</p:menubar>
 	<p:sticky target="menubar"></p:sticky>

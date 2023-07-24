@@ -2,14 +2,20 @@ package com.k1rard.tiendamusicalweb.controllers;
 
 import com.k1rard.tiendamusicalentities.dto.ArtistaAlbumDTO;
 import com.k1rard.tiendamusicalservices.service.HomeService;
+import com.k1rard.tiendamusicalweb.session.SessionBean;
+import com.k1rard.tiendamusicalweb.utils.CommonUtils;
+
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -40,6 +46,12 @@ public class HomeController {
      */
     @Autowired
     private HomeService homeServiceImpl;
+    
+    /**
+     * Objeto que almacena informacion en sesion
+     */
+    @Inject
+    private SessionBean sessionBean;
 
     /**
      * Metodo que inicializa la pantalla
@@ -65,6 +77,21 @@ public class HomeController {
             });
         }
     }
+    
+    
+    /**
+     * Metodo que permite ver el detalle del album seleccionado por el cliente
+     * @param artistaAlbumDTO {@link ArtistaAlbumDTO} Objeto con el album seleccionado.
+     */
+    public void verDetalleAlbum(ArtistaAlbumDTO artistaAlbumDTO) {
+    	this.sessionBean.setArtistaAlbumDTO(artistaAlbumDTO);
+    	try {
+			CommonUtils.redireccionar("/pages/cliente/detalle.xhtml");
+		} catch (IOException e) {
+			CommonUtils.mostrarMensaje(FacesMessage.SEVERITY_ERROR, "UPS!", "Hubo un error al intentar ingresar a la pagina solicitada, Favor de contactar con soporte.");
+			e.printStackTrace();
+		}
+    }
 
     public String getFiltro() {
         return filtro;
@@ -89,4 +116,20 @@ public class HomeController {
     public void setHomeServiceImpl(HomeService homeServiceImpl) {
         this.homeServiceImpl = homeServiceImpl;
     }
+
+	/**
+	 * @return the sessionBean
+	 */
+	public SessionBean getSessionBean() {
+		return sessionBean;
+	}
+
+	/**
+	 * @param sessionBean the sessionBean to set
+	 */
+	public void setSessionBean(SessionBean sessionBean) {
+		this.sessionBean = sessionBean;
+	}
+    
+    
 }

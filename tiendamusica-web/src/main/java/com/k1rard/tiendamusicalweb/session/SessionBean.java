@@ -3,6 +3,7 @@
  */
 package com.k1rard.tiendamusicalweb.session;
 
+import com.k1rard.tiendamusicalentities.dto.ArtistaAlbumDTO;
 import com.k1rard.tiendamusicalentities.entities.Persona;
 
 import jakarta.annotation.PostConstruct;
@@ -22,6 +23,11 @@ public class SessionBean {
 	 */
 	private Persona persona;
 	
+	/**
+	 * Objeto que contendra la informacion del detalle del album seleccionado por el cliente.
+	 */
+	private ArtistaAlbumDTO artistaAlbumDTO;
+	
 	@PostConstruct
 	public void init() {
 		System.out.println("Creando sesion...");
@@ -39,6 +45,20 @@ public class SessionBean {
 	 */
 	public void setPersona(Persona persona) {
 		this.persona = persona;
+	}
+
+	/**
+	 * @return the artistaAlbumDTO
+	 */
+	public ArtistaAlbumDTO getArtistaAlbumDTO() {
+		return artistaAlbumDTO;
+	}
+
+	/**
+	 * @param artistaAlbumDTO the artistaAlbumDTO to set
+	 */
+	public void setArtistaAlbumDTO(ArtistaAlbumDTO artistaAlbumDTO) {
+		this.artistaAlbumDTO = artistaAlbumDTO;
 	}
 	
 	
