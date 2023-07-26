@@ -16,6 +16,6 @@
 
 <!-- Importando archivos spring context entre proyectos -->
 
-	<import resource="classpath*:config/applicationContext-data.xml"></import>
+	<import resource="classpath:config/applicationContext-data.xml"></import>
 	
 </beans>

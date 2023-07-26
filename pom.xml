@@ -26,13 +26,14 @@
 		<jakarta-jstl-api-version>2.0.0</jakarta-jstl-api-version>
 		<primefaces-version>12.0.0</primefaces-version>
 		<primeflex-version>3.2.0</primeflex-version>
+		<log4j-version>2.20.0</log4j-version>
 	</properties>
 
 	<modules>
 		<module>tiendamusica-entities</module>
 		<module>tiendamusical-data</module>
 		<module>tiendamusical-services</module>
-		<module>tiendamusical-web</module>
+		<module>tiendamusica-web</module>
 	</modules>
 
 </project>

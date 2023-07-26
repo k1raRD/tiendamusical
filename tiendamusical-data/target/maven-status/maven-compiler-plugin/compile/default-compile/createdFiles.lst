@@ -1,1 +1,5 @@
-org\tiendamusical\data\App.class
+com\k1rard\tiendamusicaldata\dao\impl\ArtistaDAOImpl.class
+com\k1rard\tiendamusicaldata\dao\ArtistaDAO.class
+com\k1rard\tiendamusicaldata\dao\impl\PersonaDAOImpl.class
+com\k1rard\tiendamusicaldata\common\CommonDAO.class
+com\k1rard\tiendamusicaldata\dao\PersonaDAO.class
