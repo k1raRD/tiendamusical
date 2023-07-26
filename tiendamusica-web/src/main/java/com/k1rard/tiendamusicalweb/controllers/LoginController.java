@@ -5,7 +5,10 @@ package com.k1rard.tiendamusicalweb.controllers;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import com.k1rard.tiendamusicalentities.entities.CarritoAlbum;
 import com.k1rard.tiendamusicalentities.entities.Persona;
 import com.k1rard.tiendamusicalservices.service.LoginService;
 import com.k1rard.tiendamusicalweb.session.SessionBean;
@@ -16,6 +19,9 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -30,6 +36,11 @@ public class LoginController implements Serializable{
 	 * Identificador del objeto serializado
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Objeto que permite mostrar los mensajes de log en la consola del servidor o en un archivo externo.
+	 */
+	private static final Logger LOGGER = LogManager.getLogger(HomeController.class);
 	
 	/**
 	 * Usuario capturado por la persona
@@ -47,7 +58,7 @@ public class LoginController implements Serializable{
 	@Autowired
 	private LoginService loginServiceImpl;
 
-
+	
 	
 	@Inject
 	private SessionBean sessionBean;
@@ -66,7 +77,15 @@ public class LoginController implements Serializable{
 
 		if (personaConsultada != null) {
 			try {
+				
+				List<CarritoAlbum> filtrados =  personaConsultada.getCarrito().getCarritosAlbum().stream().filter(ca -> 
+					ca.getEstatus().equals("PENDIENTE")).collect(Collectors.toList());
+				
+				personaConsultada.getCarrito().setCarritosAlbum(filtrados);
+				
+				LOGGER.info("Albums del carrito filtrados...");
 				this.sessionBean.setPersona(personaConsultada);
+				
 				CommonUtils.redireccionar("/pages/commons/dashboard.xhtml");
 			} catch (IOException e) {
 				e.printStackTrace();

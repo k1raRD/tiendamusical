@@ -1,0 +1,125 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<h:head>
+    <ui:include src="/pages/commons/scripts.xhtml"/>
+</h:head>
+
+<h:body>
+    <div class="ui-fluid">
+        <h:form id="formCarrito">
+
+            <ui:include src="/pages/commons/navbar.xhtml"/>
+
+            <div class="grid sample-layout">
+
+                <div class="flex" style="width: 100%">
+                    <ui:include src="/pages/commons/header.xhtml"/>
+
+
+                    <div class="col-8 flex-grow-1" style="background-color: black;">
+                        <div class="grid">
+                            <div class="col-12">
+
+                                <ui:include src="/pages/commons/steps.xhtml" />
+
+                                <div class="col-1" style="width: 90%; margin: 0px auto;">
+
+                                    <p:dataView id="dataViewDetalleCarrito" rowIndexVar="index" var="carritoAlbum"
+                                                value="#{sessionBean.persona.carrito.carritosAlbum}"
+                                                layout="list" rows="10"
+                                                paginator="true" rowsPerPageTemplate="10,30,50"
+                                                paginatorPosition="bottom"
+                                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                gridIcon="pi pi-th-large" listIcon="pi pi-bars"
+                                                rendered="#{not empty homeController.artistasAlbumDTO}">
+
+                                        <p:dataViewListItem>
+                                            <div class="product-list-item">
+
+                                                <p:graphicImage
+                                                        name="images/albums/#{carritoAlbum.album.imagen}"
+                                                        style="width: 200px;" height="200px"/>
+                                                <div class="product-list-detail">
+                                                    <div class="product-name" style="font-weight: bold">Tiitulo:
+                                                        #{carritoAlbum.album.nombre}
+                                                    </div>
+                                                    <div class="product-description">#{carritoAlbum.album.descripcion}
+                                                    </div>
+                                                    <p:rating readonly="true" value="#{carritoAlbum.album.raiting}"/>
+                                                    <i class="pi pi-tag product-category-icon"/><span
+                                                        class="product-category">#{carritoAlbum.album.formato}</span>
+                                                </div>
+
+                                                <div class="product-list-action">
+                                                    <h:outputText value="#{carritoAlbum.album.valor}"
+                                                                  styleClass="product-price"
+                                                                  style="font-weight: bold">
+                                                        <f:convertNumber currencySymbol="$" type="currency"/>
+                                                    </h:outputText>
+                                                    <span
+                                                            class="product-badge status-#{product.inventoryStatus.name().toLowerCase()}">#{product.inventoryStatus.text}</span>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="flex gap-5">
+                                                <p:selectOneMenu value="#{carritoAlbum.cantidad}" style="width: 50px">
+                                                    <f:selectItem itemValue="1" itemLabel="1"/>
+                                                    <f:selectItem itemValue="2" itemLabel="2"/>
+                                                    <f:selectItem itemValue="3" itemLabel="3"/>
+                                                    <f:selectItem itemValue="4" itemLabel="4"/>
+                                                    <f:selectItem itemValue="5" itemLabel="5"/>
+
+                                                    <p:ajax event="change" listener="#{carritoController.actualizarCantidadCarrito(carritoAlbum)}" update="formCarrito:pnlTotalCompra, formCarrito:dataViewDetalleCarrito" />
+                                                </p:selectOneMenu>
+
+                                                <p:commandButton icon="pi pi-trash" styleClass="ui-button-danger" action="#{carritoController.eliminarAlbumCarrito(carritoAlbum)}" update="formCarrito:menubar, formCarrito:dataViewDetalleCarrito, formCarrito:pnlTotalCompra">
+                                                    <p:confirm header="Confirmar"
+                                                               message="Estas seguto de eliminar el producto #{carritoAlbum.album.nombre}?"
+                                                               icon="pi pi-info-circle"/>
+                                                </p:commandButton>
+
+                                            </div>
+
+                                            <p:outputLabel value="#{carritoAlbum.album.valor * carritoAlbum.cantidad}">
+                                                <f:convertNumber type="currency"/>
+                                            </p:outputLabel>
+                                        </p:dataViewListItem>
+                                    </p:dataView>
+
+
+                                    <p:panel id="pnlTotalCompra">
+                                        <p:outputLabel value="Total: "/>
+                                        <p:outputLabel value="#{carritoController.calcularTotal()}">
+                                            <f:convertNumber type="currency"/>
+                                        </p:outputLabel>
+
+                                        <p:commandButton value="Continuar" style="margin-left: 150px; width: 40%" disabled="#{empty sessionBean.persona.carrito.carritosAlbum}"  />
+                                    </p:panel>
+
+                                </div>
+
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true"
+                                                 width="350" style="top: 200px !important">
+                                    <p:commandButton value="No" type="button"
+                                                     styleClass="ui-confirmdialog-no ui-button-flat"/>
+                                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes"/>
+                                </p:confirmDialog>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <ui:include src="/pages/commons/footer.xhtml"/>
+            </div>
+        </h:form>
+    </div>
+</h:body>
+
+
+</html>

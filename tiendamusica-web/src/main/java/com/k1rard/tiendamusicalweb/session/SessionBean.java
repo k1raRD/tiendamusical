@@ -27,6 +27,11 @@ public class SessionBean {
 	 * Objeto que contendra la informacion del detalle del album seleccionado por el cliente.
 	 */
 	private ArtistaAlbumDTO artistaAlbumDTO;
+
+	/**
+	 * Total generado de la compra en sesion
+	 */
+	private Double total;
 	
 	@PostConstruct
 	public void init() {
@@ -60,6 +65,12 @@ public class SessionBean {
 	public void setArtistaAlbumDTO(ArtistaAlbumDTO artistaAlbumDTO) {
 		this.artistaAlbumDTO = artistaAlbumDTO;
 	}
-	
-	
+
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
 }

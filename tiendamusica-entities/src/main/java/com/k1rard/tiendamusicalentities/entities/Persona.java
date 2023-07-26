@@ -3,15 +3,7 @@
  */
 package com.k1rard.tiendamusicalentities.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 /**
  * @author k1rard
@@ -54,6 +46,9 @@ public class Persona extends Common{
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idRol")
 	private Rol rol;
+
+	@OneToOne(mappedBy = "persona")
+	private Carrito carrito;
 
 	/**
 	 * @return the idPersona
@@ -194,7 +189,12 @@ public class Persona extends Common{
 	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
-	
-	
-	
+
+	public Carrito getCarrito() {
+		return carrito;
+	}
+
+	public void setCarrito(Carrito carrito) {
+		this.carrito = carrito;
+	}
 }

@@ -63,7 +63,7 @@
 	
 	<!-- :::::::::::::: BEAN que se encarga de gestionar las transacciones para el CRUD de los entities ::::::::::::::::: -->
 	
-	<bean id="transaccionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
