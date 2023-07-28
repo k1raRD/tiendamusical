@@ -32,6 +32,24 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
+		<dependency>
+			<artifactId>checkout-sdk</artifactId>
+			<groupId>com.paypal.sdk</groupId>
+			<version>${paypal-checkout-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>${json-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${apache-commons-version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

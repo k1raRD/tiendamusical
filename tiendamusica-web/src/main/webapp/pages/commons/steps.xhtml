@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<div class="card" style="width: 90%; margin: 0 auto">
-		<p:steps id="stepsCompra" style="margin-bottom: 20px" activeIndex="0" readOnly="true">
+		<p:steps id="stepsCompra" style="margin-bottom: 20px" activeIndex="#{sessionBean.paso}" readOnly="true">
 			<p:menuitem value="Productos seleccionados"/>
 			<p:menuitem value="Realizar pago"/>
 			<p:menuitem value="Confirmacion"/>

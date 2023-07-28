@@ -99,7 +99,7 @@
                                             <f:convertNumber type="currency"/>
                                         </p:outputLabel>
 
-                                        <p:commandButton value="Continuar" style="margin-left: 150px; width: 40%" disabled="#{empty sessionBean.persona.carrito.carritosAlbum}"  />
+                                        <p:commandButton value="Continuar" style="margin-left: 150px; width: 40%" disabled="#{empty sessionBean.persona.carrito.carritosAlbum}" action="#{pasosController.cambiarPasos('/pages/cliente/pago.xhtml', 1)}" />
                                     </p:panel>
 
                                 </div>

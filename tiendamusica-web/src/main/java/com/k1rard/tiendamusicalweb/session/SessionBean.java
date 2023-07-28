@@ -6,6 +6,8 @@ package com.k1rard.tiendamusicalweb.session;
 import com.k1rard.tiendamusicalentities.dto.ArtistaAlbumDTO;
 import com.k1rard.tiendamusicalentities.entities.Persona;
 
+import com.paypal.http.HttpResponse;
+import com.paypal.orders.Order;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
@@ -32,6 +34,16 @@ public class SessionBean {
 	 * Total generado de la compra en sesion
 	 */
 	private Double total;
+
+	/**
+	 * Orden generada por paypal
+	 */
+	private HttpResponse<Order> order;
+
+	/**
+	 * Numero del paso actual del proceso de compra.
+	 */
+	private Integer paso;
 	
 	@PostConstruct
 	public void init() {
@@ -72,5 +84,21 @@ public class SessionBean {
 
 	public void setTotal(Double total) {
 		this.total = total;
+	}
+
+	public void setOrder(HttpResponse<Order> response) {
+		this.order = response;
+	}
+
+	public HttpResponse<Order> getOrder() {
+		return order;
+	}
+
+	public Integer getPaso() {
+		return paso;
+	}
+
+	public void setPaso(Integer paso) {
+		this.paso = paso;
 	}
 }
