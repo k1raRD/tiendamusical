@@ -1,3 +1,4 @@
 com\k1rard\tiendamusicaldata\dao\ArtistaDAO.class
+com\k1rard\tiendamusicaldata\dao\FacturaDAO.class
 com\k1rard\tiendamusicaldata\dao\CarritoAlbumDAO.class
 com\k1rard\tiendamusicaldata\dao\PersonaDAO.class

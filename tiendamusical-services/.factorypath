@@ -58,4 +58,5 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/glassfish/hk2/hk2-api/3.0.4/hk2-api-3.0.4.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/glassfish/hk2/hk2-utils/3.0.4/hk2-utils-3.0.4.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/javassist/javassist/3.29.2-GA/javassist-3.29.2-GA.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="PLUGIN" id="org.eclipse.jst.ws.annotations.core" enabled="false" runInBatchMode="false"/>
 </factorypath>

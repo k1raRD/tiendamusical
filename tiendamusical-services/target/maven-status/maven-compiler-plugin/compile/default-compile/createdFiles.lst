@@ -1,5 +1,8 @@
 com\k1rard\tiendamusicalservices\service\HomeService.class
 com\k1rard\tiendamusicalservices\service\impl\HomeServiceImpl.class
+com\k1rard\tiendamusicalservices\service\FacturaService.class
+com\k1rard\tiendamusicalservices\service\impl\FacturaServiceImpl.class
+com\k1rard\tiendamusicalservices\client\ReportesServiceClient.class
 com\k1rard\tiendamusicalservices\service\CarritoService.class
 com\k1rard\tiendamusicalservices\service\impl\CarritoServiceImpl.class
 com\k1rard\tiendamusicalservices\service\impl\LoginServiceImpl.class
