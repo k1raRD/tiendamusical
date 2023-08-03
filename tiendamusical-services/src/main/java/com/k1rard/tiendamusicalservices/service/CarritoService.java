@@ -1,8 +1,11 @@
 package com.k1rard.tiendamusicalservices.service;
 
+import java.util.List;
+
 import com.k1rard.tiendamusicalentities.dto.ArtistaAlbumDTO;
 import com.k1rard.tiendamusicalentities.entities.Carrito;
 import com.k1rard.tiendamusicalentities.entities.CarritoAlbum;
+import com.k1rard.tiendamusicalentities.entities.Factura;
 
 /**
  * @author k1rard
@@ -37,4 +40,13 @@ public interface CarritoService {
      * @param carrito {@link Carrito} Objeto con el carrito de compras del usuario.
      */
     Double actualizarAlbumCantidad(CarritoAlbum carritoAlbum, Carrito carrito);
+    
+    /**
+     * Metodo que permite actualizar los registros de los productos comprados por el cliente agregandoles la orden de compra
+     * y actualizando su estatus a pagado.
+     * @param carritoAlbums {@link List} lista de los productos en el carrito a actualizar.
+     * @param factura {@link Factura} objeto con la factura y la orden de compra.
+     * @return {@link Boolean} estatus de la actualizacion del carrito.
+     */
+    Boolean actualizarCarritoAlbum(List<CarritoAlbum> carritoAlbums, Factura factura);
 }

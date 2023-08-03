@@ -1,6 +1,8 @@
 package com.k1rard.tiendamusicalweb.controllers;
 
 import com.k1rard.tiendamusicalentities.dto.ArtistaAlbumDTO;
+import com.k1rard.tiendamusicalentities.entities.CarritoAlbum;
+import com.k1rard.tiendamusicalservices.service.CarritoService;
 import com.k1rard.tiendamusicalservices.service.HomeService;
 import com.k1rard.tiendamusicalweb.session.SessionBean;
 import com.k1rard.tiendamusicalweb.utils.CommonUtils;
@@ -52,6 +54,12 @@ public class HomeController {
      */
     @Inject
     private SessionBean sessionBean;
+    
+    /**
+     * Se inyecta el objeto de Spring para obtener los metodos de logica de negocio del carrito.
+     */
+    @Autowired
+    private CarritoService carritoService;
 
     /**
      * Metodo que inicializa la pantalla
@@ -92,6 +100,19 @@ public class HomeController {
 			e.printStackTrace();
 		}
     }
+    
+    /**
+     * Metodo que permite agregar un album en el carrito de compra.
+     * @param albumDTO {@link ArtistaAlbumDTO} album a agregar al carrito.
+     */
+    public void agregarAlbumCarrito(ArtistaAlbumDTO artistaAlbumDTO) {
+    	LOGGER.info("Agregando album: " + artistaAlbumDTO.getAlbum().getNombre());
+    	
+    	
+    	CarritoAlbum carritoAlbum =  this.carritoService.guardarAlbumsCarrito(artistaAlbumDTO, this.sessionBean.getPersona().getCarrito(), 1);
+    	
+    	this.sessionBean.getPersona().getCarrito().getCarritosAlbum().add(carritoAlbum);
+    }
 
     public String getFiltro() {
         return filtro;
@@ -130,6 +151,21 @@ public class HomeController {
 	public void setSessionBean(SessionBean sessionBean) {
 		this.sessionBean = sessionBean;
 	}
+
+	/**
+	 * @return the carritoService
+	 */
+	public CarritoService getCarritoService() {
+		return carritoService;
+	}
+
+	/**
+	 * @param carritoService the carritoService to set
+	 */
+	public void setCarritoService(CarritoService carritoService) {
+		this.carritoService = carritoService;
+	}
     
+	
     
 }

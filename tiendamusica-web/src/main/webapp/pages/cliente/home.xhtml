@@ -61,6 +61,8 @@
                                 </h:outputText>
                                 <p:commandButton type="button" value="Add To Cart"
                                                  icon="pi pi-shopping-cart"
+                                                 action="#{homeController.agregarAlbumCarrito(artistaAlbumDTO)}"
+                                                 update="formDashboard:btnShopping"
                                                  disabled="#{product.inventoryStatus == 'OUTOFSTOCK'}">
                                 </p:commandButton>
                             </div>
@@ -93,6 +95,8 @@
                                 </h:outputText>
                                 <p:commandButton type="button" value="Add To Cart"
                                                  icon="pi pi-shopping-cart"
+                                                 action="#{homeController.agregarAlbumCarrito(artistaAlbumDTO)}"
+                                                 update="formDashboard:btnShopping"
                                                  disabled="#{product.inventoryStatus == 'OUTOFSTOCK'}">
                                 </p:commandButton>
                                 <span

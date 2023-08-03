@@ -7,32 +7,11 @@
 
 <h:head>
     <ui:include src="/pages/commons/scripts.xhtml"/>
-    <script src="https://www.paypal.com/sdk/js?client-id=ASnHV5NTRChbqVAiBnIvOxDjW3IvK0GbgyhFYSuf_slOl884NSnHzenAVYOVASQgHw-Auyx5DX-EHJ7R&amp;currency=USD" > </script>
-    <script>
-       paypal.Buttons({
-        createOrder() {
-          return fetch("../../PaypalServlet", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            }
-          })
-          .then((response) => response.json())
-          .then((order) => order.result.id);
-        },
-          onApprove(data) {
-            alert('You have successfully created subscription ');
-            return actions.order.capture().then((detalle) => {
-            		finalizarTransaccion();
-          })
-        }
-      }).render('#divPaypalContainer');
-    </script>
 </h:head>
 
 <h:body>
     <div class="ui-fluid">
-        <h:form id="formPago">
+        <h:form id="confirmacion">
 
             <ui:include src="/pages/commons/navbar.xhtml"/>
 
@@ -49,9 +28,10 @@
                                 <ui:include src="/pages/commons/steps.xhtml"/>
 
                                 <div class="col-1" style="width: 90%; margin: 0px auto; text-align: center; background: black">
-                                    <div id="divPaypalContainer" style="width: 100%; margin: 0px auto; background: black">
-										<p:remoteCommand name="finalizarTransaccion" action="pagoController.guardarFactura"/>
-                                    </div>
+									<p:panelGrid columns="1" columnClasses="ui-g-12 ui-md-12" layout="grid" styleClass="ui-panelgrid-blank ui-fluid" style="text-align: center">
+										<p:outputLabel id="lblCompraExitosa" value="Compra exitosa!" style="font-size: 100px"/>
+										<p:graphicImage name="images/ok.png" width="200px" />
+									</p:panelGrid>
                                 </div>
 
                             </div>

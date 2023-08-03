@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -46,8 +45,24 @@ public class PaypalServlet extends HttpServlet {
         PaypalCreateOrder paypalCreateOrder = new PaypalCreateOrder();
 
         LOGGER.info("Entro al objeto de sesion");
-        HttpResponse<Order> order = paypalCreateOrder.crearOrden(sessionBean);
+        HttpResponse<Order> order = paypalCreateOrder.crearOrden(this.sessionBean);
         Gson gson = new Gson();
         out.write(gson.toJson(order));
     }
+
+	/**
+	 * @return the sessionBean
+	 */
+	public SessionBean getSessionBean() {
+		return sessionBean;
+	}
+
+	/**
+	 * @param sessionBean the sessionBean to set
+	 */
+	public void setSessionBean(SessionBean sessionBean) {
+		this.sessionBean = sessionBean;
+	}
+    
+    
 }

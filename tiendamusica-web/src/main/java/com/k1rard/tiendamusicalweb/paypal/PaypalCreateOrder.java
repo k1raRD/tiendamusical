@@ -170,4 +170,21 @@ public class PaypalCreateOrder extends PaypalClient {
         return this.orderRequest;
     }
 
+
+	/**
+	 * @return the carritoController
+	 */
+	public CarritoController getCarritoController() {
+		return carritoController;
+	}
+
+
+	/**
+	 * @param carritoController the carritoController to set
+	 */
+	public void setCarritoController(CarritoController carritoController) {
+		this.carritoController = carritoController;
+	}
+
+    
 }
