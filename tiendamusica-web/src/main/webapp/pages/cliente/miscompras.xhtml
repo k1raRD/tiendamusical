@@ -1,0 +1,103 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<h:head>
+	<ui:include src="/pages/commons/scripts.xhtml" />
+</h:head>
+
+<h:body>
+	<div class="ui-fluid">
+		<h:form id="formMisCompras">
+
+			<ui:include src="/pages/commons/navbar.xhtml" />
+
+			<div class="grid sample-layout">
+
+				<div class="flex" style="width: 100%">
+					<ui:include src="/pages/commons/header.xhtml" />
+
+
+					<div class="col-8 flex-grow-1" style="background-color: black;">
+						<div class="grid">
+							<div class="col-12">
+
+								<p:dataTable id="tblMisCompras" var="" value="" rows="10"
+									paginator="true" paginatorPosition="bottom"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+									<p:column headerText="# Orden">
+										<p:outputLabel value=""></p:outputLabel>
+									</p:column>
+
+									<p:column headerText="Impuestos">
+										<p:outputLabel value=""></p:outputLabel>
+									</p:column>
+
+									<p:column headerText="Total">
+										<p:outputLabel value=""></p:outputLabel>
+									</p:column>
+
+									<p:column headerText="Ver detalle">
+
+									</p:column>
+								</p:dataTable>
+
+
+								<p:outoutPanel id="opDetalleCompra" style="text-align: center">
+
+									<p:dataView id="dataViewDetalleCompra" var="" value=""
+										rows="10" paginator="true" rowsPerPageTemplate="10,30,50"
+										paginatorPosition="bottom"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										gridIcon="pi pi-th-large" listIcon="pi pi-bars"
+										rendered="true">
+
+										<p:dataViewListItem>
+
+											<div class="product-list-item">
+<!-- 												<p:graphicImage -->
+<!-- 													name="images/albums/#{artistaAlbumDTO.album.imagen}" -->
+<!-- 													style="width: 200px;" height="200px" /> -->
+												<div class="product-list-detail">
+													<div class="product-name" style="font-weight: bold">Titulo:
+														#{artistaAlbumDTO.album.nombre}</div>
+													<div class="product-description">#{artistaAlbumDTO.album.descripcion}</div>
+													<p:rating readonly="true"
+														value="#{artistaAlbumDTO.album.raiting}" />
+													<i class="pi pi-tag product-category-icon" /><span
+														class="product-category">#{artistaAlbumDTO.album.formato}</span>
+												</div>
+
+												<div class="product-list-action">
+													<h:outputText value="#{artistaAlbumDTO.album.valor}"
+														styleClass="product-price" style="font-weight: bold">
+														<f:convertNumber currencySymbol="$" type="currency" />
+													</h:outputText>
+													
+													<span
+														class="product-badge status-#{product.inventoryStatus.name().toLowerCase()}">#{product.inventoryStatus.text}</span>
+												</div>
+
+											</div>
+
+										</p:dataViewListItem>
+									</p:dataView>
+
+								</p:outoutPanel>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<ui:include src="/pages/commons/footer.xhtml" />
+			</div>
+		</h:form>
+	</div>
+</h:body>
+
+
+</html>
