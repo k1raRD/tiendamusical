@@ -23,61 +23,93 @@
 
 					<div class="col-8 flex-grow-1" style="background-color: black;">
 						<div class="grid">
-							<div class="col-12">
+							<div class="col-10" style="margin: 0px auto">
 
-								<p:dataTable id="tblMisCompras" var="" value="" rows="10"
+								<p:commandButton value="Cargar compras"
+									action="#{misComprasController.consultarFacturasPorPersona()}"
+									update="tblMisCompras" />
+
+								<p:outputLabel value="Mis Compras"></p:outputLabel>
+								<p:separator />
+
+								<p:dataTable id="tblMisCompras" var="factura"
+									value="#{misComprasController.facturas}" rows="10"
 									paginator="true" paginatorPosition="bottom"
 									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 
+									<f:facet name="header" style="text-align: center">
+										Compras realizadas
+									</f:facet>
+
+
 									<p:column headerText="# Orden">
-										<p:outputLabel value=""></p:outputLabel>
+										<p:outputLabel value="#{factura.orderId}"></p:outputLabel>
 									</p:column>
 
 									<p:column headerText="Impuestos">
-										<p:outputLabel value=""></p:outputLabel>
+										<p:outputLabel value="#{factura.impuestoTotal}">
+											<f:convertNumber type="currency" currencySymbol="$" />
+										</p:outputLabel>
 									</p:column>
 
 									<p:column headerText="Total">
-										<p:outputLabel value=""></p:outputLabel>
+										<p:outputLabel value="#{factura.total}">
+											<f:convertNumber type="currency" currencySymbol="$" />
+										</p:outputLabel>
 									</p:column>
 
 									<p:column headerText="Ver detalle">
-
+										<p:commandButton icon="pi pi-search"
+											update="formMisCompras:opDetalleCompra"
+											action="#{misComprasController.mostrarDetalle(factura.carritosAlbum)}"></p:commandButton>
 									</p:column>
 								</p:dataTable>
 
 
-								<p:outoutPanel id="opDetalleCompra" style="text-align: center">
+								<p:outputPanel id="opDetalleCompra" style="text-align: center">
 
-									<p:dataView id="dataViewDetalleCompra" var="" value=""
-										rows="10" paginator="true" rowsPerPageTemplate="10,30,50"
+
+									<p:outputLabel value="Detalle de compra"></p:outputLabel>
+									<p:separator />
+
+									<p:dataView id="dataViewDetalleCompra" var="carritoAlbum"
+										value="#{misComprasController.carritosAlbum}" rows="10"
+										paginator="true" rowsPerPageTemplate="10,30,50"
 										paginatorPosition="bottom"
 										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 										gridIcon="pi pi-th-large" listIcon="pi pi-bars"
-										rendered="true">
+										rendered="#{true}">
 
 										<p:dataViewListItem>
 
 											<div class="product-list-item">
-<!-- 												<p:graphicImage -->
-<!-- 													name="images/albums/#{artistaAlbumDTO.album.imagen}" -->
-<!-- 													style="width: 200px;" height="200px" /> -->
+												<p:graphicImage
+													name="images/albums/#{carritoAlbum.album.imagen}"
+													style="width: 200px;" height="200px" />
+
 												<div class="product-list-detail">
+													<div class="product-name" style="font-weight: bold">Orden:
+														#{carritoAlbum.factura.orderId}</div>
+
 													<div class="product-name" style="font-weight: bold">Titulo:
-														#{artistaAlbumDTO.album.nombre}</div>
-													<div class="product-description">#{artistaAlbumDTO.album.descripcion}</div>
+														#{carritoAlbum.album.nombre}</div>
+
+													<div class="product-description">#{carritoAlbum.album.descripcion}</div>
+
 													<p:rating readonly="true"
 														value="#{artistaAlbumDTO.album.raiting}" />
+
 													<i class="pi pi-tag product-category-icon" /><span
-														class="product-category">#{artistaAlbumDTO.album.formato}</span>
+														class="product-category">#{carritoAlbum.album.formato}</span>
 												</div>
 
+
 												<div class="product-list-action">
-													<h:outputText value="#{artistaAlbumDTO.album.valor}"
+													<h:outputText value="#{carritoAlbum.album.valor}"
 														styleClass="product-price" style="font-weight: bold">
 														<f:convertNumber currencySymbol="$" type="currency" />
 													</h:outputText>
-													
+
 													<span
 														class="product-badge status-#{product.inventoryStatus.name().toLowerCase()}">#{product.inventoryStatus.text}</span>
 												</div>
@@ -87,7 +119,14 @@
 										</p:dataViewListItem>
 									</p:dataView>
 
-								</p:outoutPanel>
+								</p:outputPanel>
+
+								<p:outputLabel value="#{carritoAlbum.cantidad}" />
+								<h:outputText
+									value="Total: #{carritoAlbum.album.valor * carritoAlbum.cantidad}"
+									styleClass="product-price" style="font-weight: bold">
+									<f:convertNumber currencySymbol="$" type="currency" />
+								</h:outputText>
 							</div>
 						</div>
 					</div>

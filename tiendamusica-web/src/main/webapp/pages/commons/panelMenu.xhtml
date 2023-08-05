@@ -8,9 +8,9 @@
 	
 		<p:submenu label="Mi Perfil" rendered="true" expanded="true">
 			<p:menuitem value="Informacion general"
-				ajax="false" icon="pi pi-user-edit" />
+				ajax="false" icon="pi pi-user-edit" action="#{paginaController.redireccionarPagina('/pages/cliente/infopersonal.xhtml')}" immediate="true"/>
 			<p:menuitem value="Mis compras" 
-				icon="pi pi-shopping-cart" action="#{paginaController.redireccionarPagina('/pages/cliente/miscompras.xhtml')}" />
+				icon="pi pi-shopping-cart" action="#{paginaController.redireccionarPagina('/pages/cliente/miscompras.xhtml')}" immediate="true"/>
 		</p:submenu>
 		
 		<p:submenu label="Administracion" rendered="false">
