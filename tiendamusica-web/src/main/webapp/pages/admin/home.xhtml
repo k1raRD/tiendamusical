@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:event type="preRenderView" listener="#{homeController.initialize}" />
+
+	<div class="grid">
+
+		<div class="col-12" style="background-color: black">
+
+			<div class="card">
+				<h5>Top ten albums</h5>
+				<p:barChart model="#{homeController.barChartModel}"
+					style="width: 100%; height: 500px;" />
+			</div>
+
+		</div>
+
+	</div>
+
+</ui:composition>

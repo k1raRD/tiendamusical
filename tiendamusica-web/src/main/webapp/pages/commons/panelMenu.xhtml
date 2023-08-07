@@ -8,16 +8,12 @@
 	
 		<p:submenu label="Mi Perfil" rendered="true" expanded="true">
 			<p:menuitem value="Informacion general"
-				ajax="false" icon="pi pi-user-edit" action="#{paginaController.redireccionarPagina('/pages/cliente/infopersonal.xhtml')}" immediate="true"/>
+				ajax="false" icon="pi pi-user-edit" action="#{paginaController.redireccionarPagina('/pages/cliente/infopersonal.xhtml')}" immediate="true" rendered="#{sessionBean.persona.rol.idRol == 4}"/>
 			<p:menuitem value="Mis compras" 
-				icon="pi pi-shopping-cart" action="#{paginaController.redireccionarPagina('/pages/cliente/miscompras.xhtml')}" immediate="true"/>
-		</p:submenu>
-		
-		<p:submenu label="Administracion" rendered="false">
-			<p:menuitem value="Website" url="http://www.primefaces.org"
-				icon="pi pi-external-link" />
-			<p:menuitem value="Internal" outcome="/ui/menu/menubar"
-				icon="pi pi-upload" />
+				icon="pi pi-shopping-cart" action="#{paginaController.redireccionarPagina('/pages/cliente/miscompras.xhtml')}" immediate="true" rendered="#{sessionBean.persona.rol.idRol == 4}"/>
+				<p:menuitem value="Albums" icon="pi pi-volume-up" rendered="#{sessionBean.persona.rol.idRol == 3}" />
+				<p:menuitem value="Artistas" icon="pi pi-users" rendered="#{sessionBean.persona.rol.idRol == 3}" />
+				<p:menuitem value="Perfiles" icon="pi pi-lock" rendered="#{sessionBean.persona.rol.idRol == 3}" />
 		</p:submenu>
 		
 	</p:panelMenu>

@@ -30,13 +30,17 @@
 									<ui:include src="/pages/cliente/home.xhtml" />
 								</c:if>
 
+								<!-- :::::::::::::: PANTALLA DEL ADMINISTRADOR ::::::::: -->
+								<c:if test="#{sessionBean.persona.rol.idRol == 3}">
+									<ui:include src="/pages/admin/home.xhtml" />
+								</c:if>
 							</div>
 						</div>
 					</div>
-					</div>
-
-					<ui:include src="/pages/commons/footer.xhtml" />
 				</div>
+
+				<ui:include src="/pages/commons/footer.xhtml" />
+			</div>
 		</h:form>
 	</div>
 </h:body>
