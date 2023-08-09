@@ -11,10 +11,12 @@
 
 <h:body>
 	<div class="ui-fluid">
-		<h:form id="formAlbums">
+	
+	<f:event type="preRenderView"
+				listener="#{adminArtistasController.initializer}" />
+				
+		<h:form id="formArtistas">
 
-			<f:event type="preRenderView"
-				listener="#{adminAlbumsController.initialize}" />
 
 			<p:growl id="messages" showSummary="true" showDetail="true"
 				skipDetailIfEqualsSummary="true" />
@@ -32,72 +34,61 @@
 							<div class="col-12">
 
 								<div class="col-2">
-									<p:commandButton oncomplete="PF('dlgAlbums').show()"
-										action="#{adminAlbumsController.limpiarComponentes}"
-										immediate="true" update="formAddUpdateAlbum:pblAlbums"
+									<p:commandButton oncomplete="PF('dlgArtistas').show()"
+										action="#{adminArtistasController.limpiarComponentes}"
+										immediate="true" update="formAddUpdateArtista:pblArtistas"
 										value="Agregar" />
 								</div>
 
 
-								<p:dataTable id="tblAlbums" var="album"
-									value="#{adminAlbumsController.albums}" rows="20"
-									emptyMessage="No se encontraron registros de albums..."
+								<p:dataTable id="tblArtistas" var="artista"
+									value="#{adminArtistasController.artistas}" rows="20"
+									emptyMessage="No se encontraron registros de artistas..."
 									paginator="true" rowsPerPageTemplate="20,50,100"
 									paginatorPosition="bottom"
-									filteredValue="#{adminAlbumsController.albumsFiltrados}"
+									filteredValue="#{adminArtistasController.artistasFiltrados}"
 									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 									currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} registros">
 
 									<f:facet name="header">
-										Listado de Albums
+										Listado de Artistas
 									</f:facet>
 
 									<p:column headerText="Imagen">
-										<p:graphicImage name="images/albums/#{album.imagen}"
+										<p:graphicImage name="images/artistas/#{artista.imagen}"
 											width="100%" />
 									</p:column>
 
-									<p:column headerText="Nombre" filterBy="#{album.nombre}"
+									<p:column headerText="Nombre" filterBy="#{artista.nombre}"
 										filterMatchMode="contains">
-										<p:outputLabel value="#{album.nombre}" />
+										<p:outputLabel value="#{artista.nombre}" />
 									</p:column>
 
-									<p:column headerText="Artista"
-										filterBy="#{album.artista.nombre}" filterMatchMode="contains">
-										<p:outputLabel value="#{album.artista.nombre}" />
+
+									<p:column headerText="Nacionalidad">
+										<p:outputLabel value="#{artista.nacionalidad.descripcion}" />
 									</p:column>
 
-									<p:column headerText="Anio">
-										<p:outputLabel value="#{album.anio}" />
+									<p:column headerText="Genero">
+										<p:outputLabel value="#{artista.subGenero.genero.descripcion}" />
 									</p:column>
 
-									<p:column headerText="Formato" filterBy="#{album.formato}"
-										filterMatchMode="contains">
-										<p:outputLabel value="#{album.formato}" />
+									<p:column headerText="SubGenero">
+										<p:outputLabel value="#{artista.subGenero.descripcion}" />
 									</p:column>
 
-									<p:column headerText="Precio" filterBy="#{album.valor}"
-										filterMatchMode="contains">
-										<p:outputLabel value="#{album.valor}">
-											<f:convertNumber type="currency" />
-										</p:outputLabel>
-									</p:column>
-
-									<p:column headerText="Disquera">
-										<p:outputLabel value="#{album.disquera.descripcion}" />
-
-									</p:column>
-									<p:column headerText="Estatus">
-										<p:outputLabel value="Habilitado" rendered="#{album.estatus}" />
+									<p:column headerText="Estatus" filterBy="#{artista.estatus}">
+										<p:outputLabel value="Habilitado"
+											rendered="#{artista.estatus}" />
 										<p:outputLabel value="Deshabilitado"
-											rendered="#{!album.estatus}" />
+											rendered="#{!artista.estatus}" />
 									</p:column>
 
 									<p:column headerText="Actualizar">
-										<p:commandButton icon="pi pi-pencil" immediate="true" 
-											action="#{adminAlbumsController.cargarAlbum(album)}"
-											oncomplete="PF('dlgAlbums').show()"
-											update="formAddUpdateAlbum:pblAlbums" />
+										<p:commandButton icon="pi pi-pencil" immediate="true"
+											action="#{adminArtistasController.cargarArtista(artista)}"
+											oncomplete="PF('dlgArtistas').show()"
+											update="formAddUpdateArtista:pblArtistas" />
 									</p:column>
 								</p:dataTable>
 
@@ -114,20 +105,19 @@
 
 
 
-		<p:dialog id="dlgAlbum" header="Agregar o actualizar album"
-			widgetVar="dlgAlbums" minHeight="40" responsive="true" width="50%"
+		<p:dialog id="dlgArtista" header="Agregar o actualizar artista"
+			widgetVar="dlgArtistas" minHeight="40" responsive="true" width="50%"
 			showEffect="fade" modal="true" resizable="false" height="500">
 
-			<h:form id="formAddUpdateAlbum">
+			<h:form id="formAddUpdateArtista">
 
-				<p:panelGrid id="pblAlbums" columns="1" layout="grid"
-					styleClass="ui-panelgrid-blank" columnClasses="ui-g-12" >
+				<p:panelGrid id="pblArtistas" columns="1" layout="grid"
+					styleClass="ui-panelgrid-blank" columnClasses="ui-g-12">
 
 
 					<p:outputLabel id="lblNombre" for="txtNombre" value="Nombre:" />
 					<p:inputText id="txtNombre" required="true"
-						requiredMessage="El nombre del album es requerido"
-						value="#{adminAlbumsController.album.nombre}" />
+						requiredMessage="El nombre del artista es requerido" value="#{adminArtistasController.artista.nombre}" />
 
 					<p:outputLabel id="lblImagen" value="Imagen:" />
 					<p:fileUpload mode="advanced" multiple="false"
@@ -135,63 +125,53 @@
 						allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
 						invalidSizeMessage="Maximum file size allowed is 100 KB"
 						invalidFileMessage="only gif | jpg | jpeg | png is allowed"
-						listener="#{adminAlbumsController.handleFileUpload}"
+						listener="#{adminArtistasController.handleFileUpload}"
 						label="Buscar" update="opTextImage" />
 					<p:outputPanel id="opTextImage">
 						<p:outputLabel id="lblTextImage"
-							value="Se ha cargado la imagen: #{adminAlbumsController.uploadedFile.fileName}"
-							rendered="#{adminAlbumsController.uploadedFile != null}" />
+							value="Se ha cargado la imagen: #{adminArtistasController.uploadedFile.fileName}"
+							rendered="#{adminArtistasController.uploadedFile != null}" />
 					</p:outputPanel>
 
-
-
-					<p:outputLabel id="lblAnio" for="txtAnio" value="Anio:" />
-					<p:inputText id="txtAnio" required="true"
-						requiredMessage="El anio del album es requerido"
-						value="#{adminAlbumsController.album.anio}" />
-
-					<p:outputLabel id="lblDescripcion" for="txtDescripcion"
-						value="Descripcion:" />
-					<p:inputTextarea id="txtDescripcion" required="true"
-						requiredMessage="La descripcion del album es requerida"
-						value="#{adminAlbumsController.album.descripcion}" />
-
-					<p:outputLabel id="lblFormato" for="txtFormato" value="Formato:" />
-					<p:inputText id="txtFormato" required="true"
-						requiredMessage="El formato del album es requerido"
-						value="#{adminAlbumsController.album.formato}" />
-
-					<p:outputLabel id="lblPrecio" for="txtPrecio" value="Precio:" />
-					<p:inputText id="txtPrecio" required="true"
-						requiredMessage="El precio del album es requerido"
-						value="#{adminAlbumsController.album.valor}" />
-
-					<p:outputLabel id="lblDisquera" for="cboDisquera" value="Disquera:" />
-					<p:selectOneMenu id="cboDisquera" required="true"
-						requiredMessage="La disquera es requerida"
-						value="#{adminAlbumsController.album.disquera.idDisquera}">
+					<p:outputLabel id="lblNacionalidad" for="cboNacionalidad"
+						value="Nacionalidad:" />
+					<p:selectOneMenu id="cboNacionalidad" required="true"
+						requiredMessage="La nacionalidad es requerida"
+						value="#{adminArtistasController.artista.nacionalidad.idNacionalidad}">
 						<f:selectItem itemValue="" itemLabel="Seleccione"></f:selectItem>
-						<f:selectItems var="disquera"
-							value="#{adminAlbumsController.disqueras}"
-							itemValue="#{disquera.idDisquera}"
-							itemLabel="#{disquera.descripcion}" />
+						<f:selectItems var="nacionalidad"
+							value="#{adminArtistasController.nacionalidades}"
+							itemValue="#{nacionalidad.idNacionalidad}"
+							itemLabel="#{nacionalidad.descripcion}" />
 					</p:selectOneMenu>
 
-					<p:outputLabel id="lblArtista" for="txtPrecio" value="Artista:" />
-					<p:selectOneMenu id="cboArtista" required="true"
-						requiredMessage="El artista es requerido"
-						value="#{adminAlbumsController.album.artista.idArtista}">
-						<f:selectItem itemValue="" itemLabel="Seleccione" />
-						<f:selectItems var="artista"
-							value="#{adminAlbumsController.artistas}"
-							itemValue="#{artista.idArtista}" itemLabel="#{artista.nombre}" />
+					<p:outputLabel id="lblGenero" for="cboGenero" value="Genero:" />
+					<p:selectOneMenu id="cboGenero" required="true"
+						requiredMessage="El genero es requerida" value="#{adminArtistasController.artista.subGenero.genero.idGenero}">
+						<f:selectItem itemValue="" itemLabel="Seleccione"></f:selectItem>
+						<f:selectItems var="genero"
+							value="#{adminArtistasController.generos}"
+							itemValue="#{genero.idGenero}"
+							itemLabel="#{genero.descripcion}" />
+							<p:ajax listener="#{adminArtistasController.consultarSubGenerosPorGenero}" update="cboSubGenero" />
+					</p:selectOneMenu>
+
+					<p:outputLabel id="lblSubGenero" for="cboSubGenero"
+						value="SubGenero:" />
+					<p:selectOneMenu id="cboSubGenero" required="true"
+						requiredMessage="El subGenero es requerida" value="#{adminArtistasController.artista.subGenero.idSubGenero}">
+						<f:selectItem itemValue="" itemLabel="Seleccione"></f:selectItem>
+						<f:selectItems var="subGenero"
+							value="#{adminArtistasController.subGeneros}"
+							itemValue="#{subGenero.idSubGenero}"
+							itemLabel="#{subGenero.descripcion}" />
 					</p:selectOneMenu>
 
 					<p:outputLabel id="lblEstatus" value="Estatus:"
-						rendered="{adminAlbumsController.album.idAlbum != null}" />
+						rendered="#{adminArtistasController.artista.idArtista != null}" />
 					<p:inputSwitch id="inputEstatus"
-						value="#{adminAlbumsController.album.estatus}"
-						rendered="#{adminAlbumsController.album.idAlbum != null}" />
+						value="#{adminArtistasController.artista.estatus}"
+						rendered="#{adminArtistasController.artista.idArtista != null}" />
 
 				</p:panelGrid>
 
@@ -200,10 +180,10 @@
 					styleClass="ui-panelgrid-blank" columnClasses="ui-g-6, ui-g-6">
 
 					<p:commandButton value="Guardar" styleClass="ui-button-success"
-						update="formAlbums:messages, formAddUpdateAlbum:pblAlbums, formAlbums:tblAlbums"
-						action="#{adminAlbumsController.guardar}" />
+						update="formArtistas:messages, formAddUpdateArtista:pblArtistas, formArtistas:tblArtistas"
+						action="#{adminArtistasController.guardar}" />
 					<p:commandButton value="Cancelar" styleClass="ui-button-danger"
-						onclick="PF('dlgAlbums').hide()" type="button" />
+						onclick="PF('dlgArtistas').hide()" type="button" />
 
 				</p:panelGrid>
 

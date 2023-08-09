@@ -188,7 +188,7 @@
 					</p:selectOneMenu>
 
 					<p:outputLabel id="lblEstatus" value="Estatus:"
-						rendered="{adminAlbumsController.album.idAlbum != null}" />
+						rendered="#{adminAlbumsController.album.idAlbum != null}" />
 					<p:inputSwitch id="inputEstatus"
 						value="#{adminAlbumsController.album.estatus}"
 						rendered="#{adminAlbumsController.album.idAlbum != null}" />

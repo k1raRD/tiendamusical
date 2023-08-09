@@ -3,7 +3,6 @@ package com.k1rard.tiendamusicaldata.dao;
 import com.k1rard.tiendamusicalentities.entities.Persona;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  * @author k1rard
