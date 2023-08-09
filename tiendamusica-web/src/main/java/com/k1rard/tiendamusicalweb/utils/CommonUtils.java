@@ -3,7 +3,11 @@
  */
 package com.k1rard.tiendamusicalweb.utils;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.application.FacesMessage.Severity;
@@ -35,5 +39,16 @@ public class CommonUtils {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		String contextPath = externalContext.getRequestContextPath();
 		externalContext.redirect(contextPath + url);
+	}
+	
+	/**
+	 * Metodo que permite guardar imagenes en un directorio
+	 * @param path {@link String} Directorio absoluto.
+	 * @param nombreArchivo {@link String} Nombre del archivo.
+	 * @param inputStream {@link InputStream} Contenido del archivo en flujo de bytes.
+	 * @throws IOException {@link IOException} Excepcion en caso de error al copiar y agregar la imagen del album.
+	 */
+	public static void guardarImagen(String path, String nombreArchivo, InputStream inputStream) throws IOException {
+		Files.copy(inputStream, new File(path, nombreArchivo).toPath(), StandardCopyOption.REPLACE_EXISTING);
 	}
 }

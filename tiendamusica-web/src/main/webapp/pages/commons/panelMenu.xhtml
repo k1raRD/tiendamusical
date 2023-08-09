@@ -10,8 +10,8 @@
 			<p:menuitem value="Informacion general"
 				ajax="false" icon="pi pi-user-edit" action="#{paginaController.redireccionarPagina('/pages/cliente/infopersonal.xhtml')}" immediate="true" rendered="#{sessionBean.persona.rol.idRol == 4}"/>
 			<p:menuitem value="Mis compras" 
-				icon="pi pi-shopping-cart" action="#{paginaController.redireccionarPagina('/pages/cliente/miscompras.xhtml')}" immediate="true" rendered="#{sessionBean.persona.rol.idRol == 4}"/>
-				<p:menuitem value="Albums" icon="pi pi-volume-up" rendered="#{sessionBean.persona.rol.idRol == 3}" />
+				icon="pi pi-shopping-cart" action="#{paginaController.redireccionarPagina('/pages/cliente/miscompras.xhtml')}" immediate="true" rendered="#{sessionBean.persona.rol.idRol == 4}" />
+				<p:menuitem value="Albums" icon="pi pi-volume-up" action="#{paginaController.redireccionarPagina('/pages/admin/albums.xhtml')}"  rendered="#{sessionBean.persona.rol.idRol == 3}" immediate="ttrue" />
 				<p:menuitem value="Artistas" icon="pi pi-users" rendered="#{sessionBean.persona.rol.idRol == 3}" />
 				<p:menuitem value="Perfiles" icon="pi pi-lock" rendered="#{sessionBean.persona.rol.idRol == 3}" />
 		</p:submenu>
