@@ -3,6 +3,9 @@
  */
 package com.k1rard.tiendamusicalentities.entities;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import jakarta.persistence.*;
 
 /**
@@ -50,6 +53,7 @@ public class Persona extends Common{
 	@JoinColumn(name = "idRol")
 	private Rol rol;
 
+	@Cascade(CascadeType.PERSIST)
 	@OneToOne(mappedBy = "persona")
 	private Carrito carrito;
 

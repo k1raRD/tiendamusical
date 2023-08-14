@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,6 +13,7 @@
 
 <h:body>
 
+<ui:include src="/pages/commons/loading.xhtml" />
 	<h:form id="formLogin">
 <!-- 		<p:panel id="pnlLogin" style="text-align: center"> -->
 <!-- 			<f:facet name="header"> -->
@@ -21,6 +23,7 @@
 			<!-- 			<p:messages id="msgs"> -->
 			<!-- 				<p:autoUpdate /> -->
 			<!-- 			</p:messages> -->
+			
 			
 			<div class="title-bar flex align-items-center justify-content-center">
 				<p>Inicio de Sesion</p>
@@ -55,10 +58,14 @@
 					<p:message for="txtPassword" />
 				</div>
 
-				<div>
+				<div class="flex gap-5">
 					<p:commandButton value="Entrar" validateClient="true" ajax="false"
-						update="pnlGridLogin,growl,msgs"
-						action="${loginController.entrar}" />
+						update="formLogin,growl,msgs"
+						action="#{loginController.entrar}" />
+						<p:commandButton value="Registrarse" ajax="false"
+						update="formLogin,growl,msgs"
+						immediate="true"
+						action="#{paginaController.redireccionarPagina('/registro.xhtml')}" />
 				</div>
 
 			</div>

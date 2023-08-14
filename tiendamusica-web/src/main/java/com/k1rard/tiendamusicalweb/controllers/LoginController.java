@@ -15,10 +15,13 @@ import com.k1rard.tiendamusicalweb.session.SessionBean;
 import com.k1rard.tiendamusicalweb.utils.CommonUtils;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.inject.Produces;
 import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -88,6 +91,9 @@ public class LoginController implements Serializable {
 				}
 				
 				this.sessionBean.setPersona(personaConsultada);
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+				HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+				session.setAttribute("sessionBean", this.sessionBean);
 				CommonUtils.redireccionar("/pages/commons/dashboard.xhtml");
 				
 			} catch (IOException e) {
@@ -134,5 +140,11 @@ public class LoginController implements Serializable {
 
 	public void setLoginServiceImpl(LoginService loginServiceImpl) {
 		this.loginServiceImpl = loginServiceImpl;
+	}
+	
+	@Produces
+	@Named("sessionBean")
+	public SessionBean produceSessionBean() {
+		return this.sessionBean;
 	}
 }

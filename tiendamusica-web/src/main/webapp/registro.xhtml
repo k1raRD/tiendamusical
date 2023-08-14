@@ -1,0 +1,118 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet"
+		href="https://unpkg.com/primeflex@^3/primeflex.css" />
+	<h:outputStylesheet library="css" name="login.css" />
+</h:head>
+
+<h:body>
+
+	<ui:include src="/pages/commons/loading.xhtml" />
+	<f:event type="preRenderView"
+				listener="#{registroController.initializer}" />
+	<h:form id="formRegistro">
+	
+		<!-- 		<p:panel id="pnlLogin" style="text-align: center"> -->
+		<!-- 			<f:facet name="header"> -->
+		<!-- 			 	Inicio de Sesion -->
+		<!-- 			</f:facet> -->
+
+		<!-- 			<p:messages id="msgs"> -->
+		<!-- 				<p:autoUpdate /> -->
+		<!-- 			</p:messages> -->
+
+
+		<div class="title-bar flex align-items-center justify-content-center">
+			<p>Registro de usario</p>
+		</div>
+
+		<p:growl id="growl" showDetail="true" skipDetailIfEqualsSummary="true" />
+
+
+		<div
+			class="flex flex-column gap-5 justify-content-center align-items-center"
+			style="padding-bottom: 3%">
+
+			<div class="flex" style="width: 20%; text-align: center">
+				<p:graphicImage name="images/fondo_musica.png" width="100%" />
+			</div>
+
+			<div
+				class="flex gap-2 justify-content-center align-items-center flex-wrap">
+				<p:outputLabel for="txtNombre" value="Nombre:"
+					styleClass="colorText" />
+				<p:inputText id="txtNombre" value="#{registroController.persona.nombre}"
+					required="true" requiredMessage="El nombre es requerido!" />
+				<p:message for="txtNombre" />
+			</div>
+
+			<div
+				class="flex gap-2 justify-content-center align-items-center flex-wrap">
+				<p:outputLabel for="txtApellido" value="Apellido:"
+					styleClass="colorText" />
+				<p:inputText id="txtApellido" value="#{registroController.persona.primerApellido}"
+					required="true" requiredMessage="El apellido es requerido!" />
+				<p:message for="txtApellido" />
+			</div>
+
+			<div
+				class="flex gap-2 justify-content-center align-items-center flex-wrap">
+				<p:outputLabel for="txtSegundoApellido" value="2do Apellido:"
+					styleClass="colorText" />
+				<p:inputText id="txtSegundoApellido"
+					value="#{registroController.persona.segundoApellido}" required="true"
+					requiredMessage="El segundo apellido es requerido!" />
+				<p:message for="txtSegundoApellido" />
+			</div>
+
+			<div
+				class="flex gap-2 justify-content-center align-items-center flex-wrap">
+				<p:outputLabel for="txtEmail" value="Email:" styleClass="colorText"  />
+				<p:inputText id="txtEmail" value="#{registroController.persona.email}"
+					required="true" requiredMessage="El email es requerido!" validatorMessage="El formato del email es incorrecto">
+					<f:validateRegex
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
+				<p:message for="txtEmail" />
+			</div>
+
+			<div
+				class="flex gap-2 justify-content-center align-items-center flex-wrap">
+				<p:outputLabel for="txtUsuario" value="Usuario:"
+					styleClass="colorText" />
+				<p:inputText id="txtUsuario" value="#{registroController.persona.usuario}"
+					required="true" requiredMessage="El usuario es requerido!" />
+				<p:message for="txtUsuario" />
+			</div>
+
+			<div
+				class="flex gap-2 justify-content-center align-items-center flex-wrap">
+				<p:outputLabel for="txtPassword" value="Password:"
+					styleClass="colorText" />
+				<p:password id="txtPassword" value="#{registroController.persona.password}"
+					required="true" requiredMessage="El password es requerido!" />
+				<p:message for="txtPassword" />
+			</div>
+
+			<div class="flex gap-5">
+				<p:commandButton value="Registrarse" validateClient="true"
+					ajax="false" update="formRegistro,growl,msgs"
+					action="#{registroController.guardar}" />
+				<p:commandButton value="Cancelar" ajax="false"
+					update="formRegistro,growl,msgs" immediate="true"
+					action="#{paginaController.redireccionarPagina('/login.xhtml')}" />
+			</div>
+
+		</div>
+
+		<!-- 		</p:panel> -->
+	</h:form>
+</h:body>
+
+</html>

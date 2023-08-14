@@ -31,9 +31,6 @@ public class PaypalCreateOrder extends PaypalClient {
      */
     private static final Logger LOGGER = LogManager.getLogger(PaypalCreateOrder.class);
 
-    @Inject
-    private CarritoController carritoController;
-
     /**
      * Objeto que contiene la orden de pago de la compra.
      */
@@ -72,7 +69,7 @@ public class PaypalCreateOrder extends PaypalClient {
 
         // Se configura la landinpage, el nombre de la empresa que vende el producto y la direccion de envio.
         ApplicationContext applicationContext = new ApplicationContext().brandName("K1rad INC...")
-                .landingPage("BILLING").shippingPreference("SET_PROVIDER_ADDRESS");
+                .landingPage("BILLING").shippingPreference("SET_PROVIDED_ADDRESS");
 
         this.orderRequest.applicationContext(applicationContext);
 
@@ -121,11 +118,11 @@ public class PaypalCreateOrder extends PaypalClient {
                 .adminArea1("Republic Dominicana")
                 .adminArea2("Santo domingo")
                 .postalCode("10207")
-                .countryCode("DR"));
+                .countryCode("DO"));
 
         // Se aplica formato a la cantidad del total de compra de los productos
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        double totalConDecimales = Double.parseDouble(decimalFormat.format(carritoController.calcularTotal()));
+        double totalConDecimales = Double.parseDouble(decimalFormat.format(sessionBean.getTotal()));
 
         double envio = 20.00;
         double handling = 10.00;
@@ -169,22 +166,6 @@ public class PaypalCreateOrder extends PaypalClient {
 
         return this.orderRequest;
     }
-
-
-	/**
-	 * @return the carritoController
-	 */
-	public CarritoController getCarritoController() {
-		return carritoController;
-	}
-
-
-	/**
-	 * @param carritoController the carritoController to set
-	 */
-	public void setCarritoController(CarritoController carritoController) {
-		this.carritoController = carritoController;
-	}
 
     
 }

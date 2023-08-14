@@ -11,10 +11,10 @@
 
 <h:body>
 	<div class="ui-fluid">
-	
-	<f:event type="preRenderView"
-				listener="#{adminPerfilesController.initializer}" />
-				
+
+		<f:event type="preRenderView"
+			listener="#{adminPerfilesController.initializer}" />
+
 		<h:form id="formPerfiles">
 
 
@@ -42,6 +42,7 @@
 
 
 								<p:dataTable id="tblPerfiles" var="perfil"
+									widgetVar="tblPerfiles"
 									value="#{adminPerfilesController.perfiles}" rows="20"
 									emptyMessage="No se encontraron registros de perfiles..."
 									paginator="true" rowsPerPageTemplate="20,50,100"
@@ -59,14 +60,23 @@
 										filterMatchMode="contains">
 										<p:outputLabel value="#{perfil.nombre}" />
 									</p:column>
-									
+
 									<p:column headerText="Fecha de Creacion">
-										<p:outputLabel value="#{perfil.fechaCreacion}" converter="localDateTimeConverter" />
+										<p:outputLabel value="#{perfil.fechaCreacion}"
+											converter="localDateTimeConverter" />
 									</p:column>
 
-									<p:column headerText="Estatus" filterBy="#{perfil.estatus}" filterMatchMode="contains">
-										<p:outputLabel value="Habilitado"
-											rendered="#{perfil.estatus}" />
+									<p:column headerText="Estatus" filterBy="#{perfil.estatus}"
+										filterMatchMode="exact">
+										<f:facet name="filter">
+											<p:selectOneMenu onchange="PF('tblPerfiles').filter()">
+												<f:selectItem itemLabel="Seleccione" itemValue="#{null}"
+													noSelectionOption="true" />
+												<f:selectItem itemLabel="No Habilitado" itemValue="false"/>
+												<f:selectItem itemLabel="Habilitado" itemValue="true"/>
+											</p:selectOneMenu>
+										</f:facet>
+										<p:outputLabel value="Habilitado" rendered="#{perfil.estatus}" />
 										<p:outputLabel value="Deshabilitado"
 											rendered="#{!perfil.estatus}" />
 									</p:column>
@@ -101,7 +111,8 @@
 
 					<p:outputLabel id="lblNombre" for="txtNombre" value="Nombre:" />
 					<p:inputText id="txtNombre" required="true"
-						requiredMessage="El nombre del perfil es requerido" value="#{adminPerfilesController.perfil.nombre}" />
+						requiredMessage="El nombre del perfil es requerido"
+						value="#{adminPerfilesController.perfil.nombre}" />
 
 					<p:outputLabel id="lblEstatus" value="Estatus:"
 						rendered="#{adminPerfilesController.perfil.idRol != null}" />

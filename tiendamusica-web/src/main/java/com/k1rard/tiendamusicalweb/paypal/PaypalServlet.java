@@ -4,12 +4,17 @@ import com.google.gson.Gson;
 import com.k1rard.tiendamusicalweb.session.SessionBean;
 import com.paypal.http.HttpResponse;
 import com.paypal.orders.Order;
+
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.io.IOException;
@@ -20,11 +25,13 @@ import java.io.PrintWriter;
  * Servlet que configura el boton de compra de paypal
  */
 @WebServlet("/PaypalServlet")
+@Named
 public class PaypalServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
     @Inject
+    @Named("sessionBean")
     private SessionBean sessionBean;
 
     /**
@@ -43,6 +50,9 @@ public class PaypalServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         LOGGER.info("Generando orden de compra.");
         PaypalCreateOrder paypalCreateOrder = new PaypalCreateOrder();
+        
+        HttpSession session =  req.getSession();
+        this.sessionBean = (SessionBean) session.getAttribute("sessionBean");
 
         LOGGER.info("Entro al objeto de sesion");
         HttpResponse<Order> order = paypalCreateOrder.crearOrden(this.sessionBean);

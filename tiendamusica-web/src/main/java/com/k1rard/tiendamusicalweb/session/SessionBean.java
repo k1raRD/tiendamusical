@@ -10,13 +10,14 @@ import com.paypal.http.HttpResponse;
 import com.paypal.orders.Order;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Named;
 
 /**
  * @author k1rard
  * Clase que mantendra la informacion en la sesion del usuario 
  */
-@Named
+@Named("sessionBean")
 @SessionScoped
 public class SessionBean {
 	
@@ -101,4 +102,5 @@ public class SessionBean {
 	public void setPaso(Integer paso) {
 		this.paso = paso;
 	}
+	
 }
